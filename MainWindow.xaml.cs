@@ -26,7 +26,6 @@ namespace wpf_shambala_async_RW_file_20_11_2023
         public MainWindow()
         {
             InitializeComponent();
-            DateTime dateTime = new DateTime();
         }
 
         // считываем из файла
@@ -41,15 +40,17 @@ namespace wpf_shambala_async_RW_file_20_11_2023
             
             try
             {
+                // выводим текущее время
                 text_beg.Text = DateTime.Now.ToString();
                 if (dialog.ShowDialog() == true)
                 {
-                    
+                    // если выбран файл то считываем асинхронно
                     string path = dialog.FileName;
                     using (StreamReader sw = new StreamReader(path))
 
                     { data = await sw.ReadToEndAsync(); }
                 }
+                // выводим текущее время
                 text_out.Text = data;
                 text_end.Text = DateTime.Now.ToString();
             }
