@@ -26,27 +26,32 @@ namespace wpf_shambala_async_RW_file_20_11_2023
         public MainWindow()
         {
             InitializeComponent();
+            DateTime dateTime = new DateTime();
         }
 
         // считываем из файла
         private async void button1_Click(object sender, RoutedEventArgs e)
         {
+            //DateTime dateTime = new DateTime();
             string data = null;
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "TXT Files(*.txt)|*.txt|All(*.*)|*";
             dialog.RestoreDirectory = true;
             dialog.InitialDirectory = dialog.FileName;
-
+            
             try
             {
+                text_beg.Text = DateTime.Now.ToString();
                 if (dialog.ShowDialog() == true)
                 {
+                    
                     string path = dialog.FileName;
                     using (StreamReader sw = new StreamReader(path))
 
                     { data = await sw.ReadToEndAsync(); }
                 }
                 text_out.Text = data;
+                text_end.Text = DateTime.Now.ToString();
             }
             catch (Exception ex)
             {
